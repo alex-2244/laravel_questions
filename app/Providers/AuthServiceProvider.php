@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Question;
+use App\Policies\QuestionPolicy; 
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+
+    // when using the policy Auth we have to register here first
+    protected $policies = [
+        // 'App\Model' => 'App\Policies\ModelPolicy',
+        Question::class => QuestionPolicy::class,
+    ];
+
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerPolicies();
+
+
+        //AUTH USING GATE METHOD
+        // \Gate::define('update-question', function($user, $question) {
+        //     return $user->id == $question->user_id;
+        // });
+        // \Gate::define('delete-question', function($user, $question) {
+        //     return $user->id == $question->user_id;
+        // });
+    }
+}
