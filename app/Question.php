@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-	protected $fillable = ['title', 'slug', 'body', 'views', 'answers', 'votes', 'best_answer_id', 'user_id'];
+	protected $fillable = ['title', 'slug', 'body', 'views', 'answers_count', 'votes', 'best_answer_id', 'user_id'];
 
   public function users()
   {
@@ -50,5 +50,7 @@ class Question extends Model
   {
     return $this->hasMany(Answer::class);
   }
+
+  
 
 }

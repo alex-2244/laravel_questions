@@ -41,6 +41,5 @@ class CreateQuestionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('questions');
-        // Schema::dropForeign('user_id');
     }
 }

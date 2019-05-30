@@ -16,6 +16,7 @@
 
                 <div class="card-body"> 
                     {!! $question->body_html !!}
+                    {{-- {!! Parsedown::instance()->text($question->body) !!} --}}
                 </div>
             </div>
         </div>

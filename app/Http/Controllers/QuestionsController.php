@@ -117,7 +117,6 @@ class QuestionsController extends Controller
         //     return abort(403, "Access denied");
         // }
 
-
         //POLICY AUTH METHOD
         $this->authorize('delete', $question);//Auth policy
         $question->delete();
