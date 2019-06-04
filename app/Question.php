@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+// use Parsedown;
 
 class Question extends Model
 {
-	protected $fillable = ['title', 'slug', 'body', 'views', 'answers_count', 'votes', 'best_answer_id', 'user_id'];
+	protected $fillable = ['title', 'slug', 'body', 'views', 'answers', 'votes', 'best_answer_id', 'user_id'];
+
 
   public function users()
   {
@@ -20,8 +22,7 @@ class Question extends Model
   }
 
   public function getUrlAttribute()
-  {
-    // $user = Auth::User();
+  {    
     return route('questions.show', $this->slug);
   }
 
@@ -43,6 +44,7 @@ class Question extends Model
 
   public function getBodyHtmlAttribute()
   {
+    // dd($this->body);
     return \Parsedown::instance()->text($this->body);
   }
 

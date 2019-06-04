@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use Illuminate\Http\Request;
-use View;
 use App\Http\Requests\AskQuestionRequest;
 
 class QuestionsController extends Controller
@@ -22,7 +21,7 @@ class QuestionsController extends Controller
     public function index()
     {
         $questions = Question::with('users')->latest()->paginate(5);
-        return View::make('questions.index', compact('questions'));
+        return view('questions.index', compact('questions'));
     }
 
     /**
@@ -33,7 +32,7 @@ class QuestionsController extends Controller
     public function create()
     {
         $question = new Question();
-        return View::make('questions.create', compact('question'));
+        return view('questions.create', compact('question'));
     }
 
     /**
@@ -61,8 +60,9 @@ class QuestionsController extends Controller
         // $question->views = $question->views + 1;
         // $question->save();
         // OR
+        // dd($question->body);
         $question->increment('views');
-        return View::make('questions.show', compact('question'));
+        return view('questions.show', compact('question'));
 
     }
 
@@ -81,7 +81,7 @@ class QuestionsController extends Controller
 
         //POLICY AUTH METHOD
         $this->authorize('update', $question);//Auth policy
-        return View::make('questions.edit', compact('question'));
+        return view('questions.edit', compact('question'));
     }
 
     /**

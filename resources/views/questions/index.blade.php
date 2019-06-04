@@ -47,7 +47,7 @@
                                             <button onclick="return confirm('Are you sure?')" class="btn btn-sm btn-outline-danger">Delete</button>
                                         </form>
                                     @endif --}}
-                                    @can ('update', $question)
+                                    @can('update', $question)
                                         <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
                                     @endcan
                                     @can ('delete', $question)
@@ -61,14 +61,14 @@
                             </div>
                             <p class="lead">
                                 Asked by
-                                <a href="{{ Auth::user()->url }}">{{ Auth::user()->name }}</a>
+                                <a href="{{ Auth::user() }}">{{ Auth::user()->name }}</a>
                                 <small class="text-muted">{{ $question->created_date }}</small>
                             </p>
                             <p>{{ str_limit($question->body, 225) }}</p>
                         </div>
                     </div>
                     <hr>
-                    @endforeach 
+                    @endforeach
                     <div class="align-center">
                         {{ $questions->links() }}
                     </div>

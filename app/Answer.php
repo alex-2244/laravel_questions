@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Answer extends Model
 {
-    protected $fillable = ['question_id', 'user_id', 'body', 'votes_count'];
+
+    protected $fillable = ['user_id', 'body'];
 
     public function users()
     {
@@ -17,22 +19,32 @@ class Answer extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    public function getCreatedDateAttribute()
+    {
+       return $this->created_at->diffForHumans();
+    }
 
     public function getBodyHtmlAttribute()
     {
         return \Parsedown::instance()->text($this->body);
     }
 
-    public static function boot()
+    public static function __boot()
     {
         parent::boot();
 
         static::created(function($answer) {
-            // error_log($answer->question);
-            // $answer->question->increment('answers_count');
+            // error_log($answer);
+            // dd($answer, true);
+            $answer->question->increment('answers_count');
             // $answer->question->save();
-            $answer->question['answers_count'] = $answer->question + 1;
-            $answer->question->save();
+            // $answer->question['answers_count'] = $answer->question + 1;
+            // $answer->question->save();
+        });
+        static::deleted(function ($answer) {
+            $answer->question->decrement('answers_count');
         });
     }
+
+    
 }
