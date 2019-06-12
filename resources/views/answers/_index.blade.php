@@ -17,10 +17,15 @@
                             <a title="This answer is not useful" class="vote-down off">
                                 <i class="fa fa-caret-down fa-3x"></i>
                             </a>
-                            <a title="Mark this answer as best answer" class="vote-accepted">
+                            <a title="Mark this answer as best answer" class="vote-accepted" 
+                                onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();" 
+                                >
                                 <i class="fa fa-check fa-2x"></i>
                             </a>
                         </div>
+                        <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                         <div class="media-body">
                             {!! $answer->body_html !!}
                             <div class="row">
